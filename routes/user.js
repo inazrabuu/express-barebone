@@ -1,8 +1,9 @@
 const express = require('express'),
       route = express.Router(),
-      NotFoundError = require('../errors/notFoundError')
+      NotFoundError = require('../errors/notFoundError'),
+      { advancedLimiter } = require('../middleware/rateLimit')
 
-route.get('/:id', async (req, res) => {
+route.get('/:id', advancedLimiter, async (req, res) => {
   const userId = req.params.id
 
   if (userId !== '123') {
