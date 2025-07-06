@@ -1,4 +1,5 @@
-const NotFoundError = require('../errors/notFoundError')
+const userService = require('../services/userService'),
+      NotFoundError = require('../errors/notFoundError')
 
 exports.me = async (req, res) => {
   if (!req.session.userId) {
@@ -34,14 +35,14 @@ exports.logout = (req, res, next) => {
 }
 
 exports.getById = async (req, res) => {
-  const userId = req.params.id
+  const user = userService.getById(req.params.id)
 
-  if (userId !== '123') {
+  if (user.id !== '123') {
     throw new NotFoundError('User Not Found!')
   }
 
   res.success({
-    id: userId,
-    name: 'One Two Three'
+    id: user.id,
+    name: user.name
   })
 }
