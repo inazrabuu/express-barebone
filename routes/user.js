@@ -8,11 +8,8 @@ route.get('/me', (req, res) => {
     throw new NotFoundError('Not logged in')
   }
 
-  res.json({
-    success: true,
-    data: {
-      user: req.session.userId
-    }
+  res.success({
+    user: req.session.userId
   })
 })
 
@@ -21,11 +18,9 @@ route.get('/login/:id', (req, res, next) => {
   
   req.session.save((err) => {
     if (err) return next(err)
-    res.json({
-      success: true,
-      data: {
-        message: `Login for ${req.session.userId} is successful`
-      }
+
+    res.success({
+      message: `Login for ${req.session.userId} is successful`
     })
   })
 })
@@ -35,8 +30,7 @@ route.get('/logout', (req, res, next) => {
     if (err) return next(err)
 
     res.clearCookie('connect.sid') // default cookie name
-    res.json({ 
-      success: true, 
+    res.success({
       message: 'Logged out successfully' 
     })
   })
@@ -49,12 +43,9 @@ route.get('/:id', advancedLimiter, async (req, res) => {
     throw new NotFoundError('User Not Found!')
   }
 
-  res.json({
-    success: true,
-    data: {
-      id: userId,
-      name: 'One Two Three'
-    }
+  res.success({
+    id: userId,
+    name: 'One Two Three'
   })
 })
 
