@@ -20,22 +20,25 @@ const redisLimiter = new RateLimiterRedis({
   storeClient: redisClient,
   keyPrefix: 'rate-limit',
   points: 10,
-  duration: 60
+  duration: 60,
+  blockDuration: 60
 })
 
-const advancedLimiter = (req, res, next) => {
+const advancedLimiter = async (req, res, next) => {
   const key = req.ip
 
-  redisLimiter.consume(key)
-    .then(() => {
-      next()
+  try {
+    await redisLimiter.consume(key)
+    next()
+  } catch (rateLimiterRes) {
+    const retrySecs = Math.round(rateLimiterRes.msBeforeNext / 1000) || 1
+
+    res.set('Retry-After', retrySecs)
+    res.status(429).json({
+      success: false,
+      message: `Too many requests, please try again in ${retrySecs} second(s)!`
     })
-    .catch(() => {
-      res.status(429).json({
-        success: false,
-        message: 'Too many requests, please slow down!'
-      })
-    })
+  }
 }
 
 module.exports = {
