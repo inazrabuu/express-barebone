@@ -7,11 +7,14 @@ const indexRoute = require('./routes/index'),
       userRoute = require('./routes/user'),
       errorHandler = require('./middleware/errorHandler'),
       { morganMiddleware } = require('./middleware/logger'),
+      sessionMiddleware = require('./middleware/session'),
       { basicLimiter } = require('./middleware/rateLimit')
 
 app.use(express.json())
 app.use(morganMiddleware)
 app.use(basicLimiter)
+app.use(sessionMiddleware)
+
 app.use('/api/', indexRoute)
 app.use('/api/users', userRoute)
 
