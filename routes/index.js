@@ -1,10 +1,7 @@
 const express = require('express'),
-      route = express.Router()
+      route = express.Router(),
+      indexController = require('../controllers/indexController')
 
-route.get('/', async (req, res) => {
-  res.success({
-    message: 'API'
-  })
-})
+route.get('/', indexController.index)
 
 module.exports = route
