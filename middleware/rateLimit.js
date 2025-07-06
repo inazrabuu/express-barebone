@@ -1,12 +1,6 @@
 const rateLimit = require('express-rate-limit'),
       { RateLimiterRedis } = require('rate-limiter-flexible'),
-      Redis = require('ioredis')
-
-const redisClient = new Redis({
-  host: '127.0.0.1',
-  port: 6379,
-  enableOfflineQueue: false
-})
+      redisClient = require('../config/redis')
 
 const basicLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
