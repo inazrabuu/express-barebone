@@ -3,5 +3,6 @@ const express = require('express'),
       indexController = require('../controllers/indexController')
 
 route.get('/', indexController.index)
+route.get('/healthz', indexController.healthz)
 
 module.exports = route
