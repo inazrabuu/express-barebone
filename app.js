@@ -13,7 +13,7 @@ const helmet = require('helmet'),
       { basicLimiter } = require('./middleware/rateLimit'),
       responseWrapper = require('./middleware/responseWrapper')
 
-app.use(cors())
+app.use(cors(require('./config/cors')))
 app.use(helmet(require('./config/helmet')))
 app.use(express.json())
 app.use(responseWrapper)
