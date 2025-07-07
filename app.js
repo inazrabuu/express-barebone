@@ -7,6 +7,7 @@ const helmet = require('helmet'),
       cors = require('cors'),
       indexRoute = require('./routes/index.route'),
       userRoute = require('./routes/user.route'),
+      authRoute = require('./routes/auth.route'),
       errorHandler = require('./middlewares/error.middleware'),
       { morganMiddleware } = require('./middlewares/logger.middleware'),
       sessionMiddleware = require('./middlewares/session.middleware'),
@@ -22,6 +23,7 @@ app.use(basicLimiter)
 app.use(sessionMiddleware)
 
 app.use('/api/', indexRoute)
+app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute)
 
 app.use(errorHandler)
