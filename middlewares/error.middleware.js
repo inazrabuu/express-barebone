@@ -1,4 +1,4 @@
-const { logger } = require('./logger')
+const { logger } = require('./logger.middleware')
 
 module.exports = (err, req, res, next) => {
   const isDev = process.env.NODE_ENV !== 'prod'

@@ -5,13 +5,13 @@ const express = require('express'),
 
 const helmet = require('helmet'),
       cors = require('cors'),
-      indexRoute = require('./routes/index'),
-      userRoute = require('./routes/user'),
-      errorHandler = require('./middleware/errorHandler'),
-      { morganMiddleware } = require('./middleware/logger'),
-      sessionMiddleware = require('./middleware/session'),
-      { basicLimiter } = require('./middleware/rateLimit'),
-      responseWrapper = require('./middleware/responseWrapper')
+      indexRoute = require('./routes/index.route'),
+      userRoute = require('./routes/user.route'),
+      errorHandler = require('./middlewares/error.middleware'),
+      { morganMiddleware } = require('./middlewares/logger.middleware'),
+      sessionMiddleware = require('./middlewares/session.middleware'),
+      { basicLimiter } = require('./middlewares/rateLimit.middleware'),
+      responseWrapper = require('./middlewares/response.middleware')
 
 app.use(cors(require('./config/cors')))
 app.use(helmet(require('./config/helmet')))

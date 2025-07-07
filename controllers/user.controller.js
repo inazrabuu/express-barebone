@@ -1,5 +1,5 @@
-const userService = require('../services/userService'),
-      NotFoundError = require('../errors/notFoundError')
+const userService = require('../services/user.service'),
+      NotFoundError = require('../errors/notFound.error')
 
 exports.me = async (req, res) => {
   if (!req.session.userId) {
