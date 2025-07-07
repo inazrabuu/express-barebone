@@ -3,7 +3,9 @@ require('express-async-errors')
 const express = require('express'),
       app = express()
 
-const indexRoute = require('./routes/index'),
+const helmet = require('helmet'),
+      cors = require('cors'),
+      indexRoute = require('./routes/index'),
       userRoute = require('./routes/user'),
       errorHandler = require('./middleware/errorHandler'),
       { morganMiddleware } = require('./middleware/logger'),
@@ -11,6 +13,8 @@ const indexRoute = require('./routes/index'),
       { basicLimiter } = require('./middleware/rateLimit'),
       responseWrapper = require('./middleware/responseWrapper')
 
+app.use(cors())
+app.use(helmet(require('./config/helmet')))
 app.use(express.json())
 app.use(responseWrapper)
 app.use(morganMiddleware)
