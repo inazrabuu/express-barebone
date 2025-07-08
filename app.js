@@ -5,6 +5,7 @@ const express = require('express'),
 
 const helmet = require('helmet'),
       cors = require('cors'),
+      cookieParser = require('cookie-parser'),
       indexRoute = require('./routes/index.route'),
       userRoute = require('./routes/user.route'),
       authRoute = require('./routes/auth.route'),
@@ -17,6 +18,7 @@ const helmet = require('helmet'),
 app.use(cors(require('./config/cors')))
 app.use(helmet(require('./config/helmet')))
 app.use(express.json())
+app.use(cookieParser())
 app.use(responseWrapper)
 app.use(morganMiddleware)
 app.use(basicLimiter)

@@ -6,6 +6,8 @@ const express = require('express'),
       { loginValidator } = require('../validators/auth.validator')
 
 route.post('/login', loginValidator, validateRequest, authController.login)
+route.get('/logout', protect, authController.logout)
+route.get('/refresh_token', protect, authController.refreshToken)
 route.get('/protect', protect, (req, res) => {
   res.success('You are authenticated!')
 })
