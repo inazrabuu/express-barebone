@@ -11,8 +11,13 @@ module.exports = (err, req, res, next) => {
   const statusCode = err.statusCode || 500,
         message = err.message || 'Internal Server Error'
 
-  res.fail({
+  let body = {
     name: err.name,
     message: message
-  }, statusCode)
+  }
+
+  if (err.details)
+    body.details = err.details
+
+  res.fail(body, statusCode)
 }
