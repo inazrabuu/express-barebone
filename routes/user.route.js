@@ -1,6 +1,6 @@
 const express = require('express'),
       route = express.Router(),
-      userController = require('../controllers/user.controller'),
+      { userController } = require('../controllers'),
       { advancedLimiter } = require('../middlewares/rateLimit.middleware')
 
 route.get('/me', userController.me)
