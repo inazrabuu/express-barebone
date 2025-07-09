@@ -1,5 +1,5 @@
 const jwtUtils = require('../utils/jwt'),
-      { notAuthError } = require('../errors/notAuth.error')
+      { notAuthError } = require('../errors')
 
 exports.protect = (req, res, next) => {
   const authHeader = req.headers.authorization
@@ -15,6 +15,6 @@ exports.protect = (req, res, next) => {
     req.user = decoded
     next()
   } catch(err) {
-    throw new NotAuthError('Invalid or expired token')
+    throw new notAuthError('Invalid or expired token')
   }
 }
