@@ -1,11 +1,11 @@
 const jwtUtils = require('../utils/jwt'),
-      NotAuthError = require('../errors/notAuth.error')
+      { notAuthError } = require('../errors/notAuth.error')
 
 exports.protect = (req, res, next) => {
   const authHeader = req.headers.authorization
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    throw new NotAuthError()
+    throw new notAuthError()
   }
 
   const token = authHeader.split(' ')[1]

@@ -2,8 +2,7 @@ const bcrypt = require('bcryptjs'),
       jwtUtils = require('../utils/jwt'),
       userService = require('../services/user.service'),
       authService = require('../services/auth.service'),
-      notAuthError = require('../errors/notAuth.error'),
-      customError = require('../errors/custom.error')
+      { notAuthError, customError } = require('../errors')
 
 exports.login = async (req, res) => {
   const { email, password } = req.body

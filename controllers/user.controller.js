@@ -1,9 +1,9 @@
 const userService = require('../services/user.service'),
-      NotFoundError = require('../errors/notFound.error')
+      { notFoundError, notAuthError } = require('../errors')
 
 exports.me = async (req, res) => {
   if (!req.session.userId) {
-    throw new NotFoundError('Not logged in')
+    throw new notAuthError('Not logged in')
   }
 
   res.success({
@@ -38,7 +38,7 @@ exports.getById = async (req, res) => {
   const user = userService.getById(req.params.id)
 
   if (user.id !== '123') {
-    throw new NotFoundError('User Not Found!')
+    throw new notFoundError('User Not Found!')
   }
 
   res.success({
