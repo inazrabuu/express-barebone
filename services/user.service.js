@@ -1,15 +1,16 @@
-const utilNumbers = require('../utils/numbers')
-
-const users = [
-  {
-    id: 1,
-    email: 'admin@mail.com',
-    password: '$2b$10$2auSKiRFVpNyWw7RL6USHOOtaQM0pnDbdTulsp1iGx6eMAHGwEGlK'
-  }
-]
+const prisma = require('../utils/prisma'),
+      utilNumbers = require('../utils/numbers')
 
 async function getByEmail(email) {
-  return users.find((u) => u.email === email)
+  return await prisma.user.findUnique({
+    where: { email }
+  }) 
+}
+
+async function create(userData) {
+  return await prisma.user.create({
+    data: userData
+  })
 }
 
 function getById(id) {
@@ -23,5 +24,6 @@ function getById(id) {
 
 module.exports = {
   getByEmail,
+  create,
   getById
 }
