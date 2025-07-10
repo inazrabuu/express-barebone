@@ -1,4 +1,4 @@
-const prisma = require('../utils/prisma'),
+const prisma = require('../config/prisma'),
       utilNumbers = require('../utils/numbers')
 
 async function getByEmail(email) {

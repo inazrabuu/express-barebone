@@ -1,5 +1,5 @@
 const projectName = process.env.npm_package_name,
-      prisma = require('../utils/prisma')
+      prisma = require('../config/prisma')
 
 exports.index = async (req, res) => {
   res.success({

@@ -37,5 +37,6 @@ const advancedLimiter = async (req, res, next) => {
 
 module.exports = {
   basicLimiter,
+  redisLimiter,
   advancedLimiter
 }
